@@ -16,6 +16,9 @@ Trình đọc truyện chữ riêng tư, tối ưu cho điện thoại. Chạy h
   - *Dán văn bản* — tự nhận số & tên "Chương …".
 - Đã nạp sẵn **Chương 868** để mở là đọc được ngay.
 
+> 🤖 **Dùng máy khác?** Xem [`CLAUDE.md`](CLAUDE.md) — hướng dẫn để một AI agent tự
+> cập nhật chương mới sau khi clone repo (chỉ cần đăng nhập Facebook một lần mỗi máy).
+
 ## Chạy
 
 Mở `index.html` (hoặc `Đọc Truyện.html`) bằng trình duyệt. Để dùng như app trên điện thoại,

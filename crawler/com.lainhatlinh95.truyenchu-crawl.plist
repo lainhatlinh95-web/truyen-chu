@@ -27,9 +27,9 @@
     <key>Minute</key><integer>0</integer>
   </dict>
 
-  <!-- if the Mac was asleep at 06:00, run as soon as it wakes -->
+  <!-- also run each time you log in / open the Mac (idempotent: no-op if no new chapters) -->
   <key>RunAtLoad</key>
-  <false/>
+  <true/>
 
   <key>StandardOutPath</key>
   <string>/Users/tdadnhatlinh/truyen-chu/crawler/.secrets/launchd.out.log</string>

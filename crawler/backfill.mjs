@@ -59,14 +59,17 @@ try {
     try {
       await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
     } catch { /* transient nav error — skip this one */ consecEmpty++; continue; }
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(2800);
 
     if (/\/login|\/checkpoint/.test(page.url())) {
       console.error('Facebook login wall — session lost. Saved progress; re-run login.mjs then this script.');
       break;
     }
-    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-    await page.waitForTimeout(1200);
+    // scroll the results a few times so the exact chapter post surfaces
+    for (let s = 0; s < 3; s++) {
+      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+      await page.waitForTimeout(1100);
+    }
 
     const html = await page.content();
     const ids = extractDocIds(html).filter((id) => !seenDocIds.has(id));

@@ -62,7 +62,8 @@
   var state = load(LS_STATE, { lastNum: null, pos: {}, read: {} });
   if (!state.pos) state.pos = {};
   if (!state.read) state.read = {};
-  var settings = load(LS_SETTINGS, { theme: 'sepia', font: 'lora', fs: 20, lh: 1.85 });
+  var settings = load(LS_SETTINGS, { theme: 'sepia', font: 'lora', fs: 20, lh: 1.85, sort: 'desc' });
+  if (settings.sort !== 'asc' && settings.sort !== 'desc') settings.sort = 'desc';   // 'desc' = mới nhất trước
 
   var current = null;       // current chapter num while reading
   var saveTimer = null;
@@ -138,6 +139,16 @@
      ============================================================ */
   function sortChaps() { chapters.sort(function (a, b) { return a.num - b.num; }); }
 
+  function updateSortLabel() {
+    $('#sortLbl').textContent = settings.sort === 'desc' ? 'Mới nhất' : 'Cũ nhất';
+  }
+  $('#sortBtn').onclick = function () {
+    settings.sort = settings.sort === 'desc' ? 'asc' : 'desc';
+    save(LS_SETTINGS, settings);
+    updateSortLabel();
+    renderLibrary();
+  };
+
   function progressOf(num) {
     var p = state.pos[num];
     if (state.read[num]) return 100;
@@ -152,7 +163,7 @@
     $('#libSub').textContent = chapters.length
       ? chapters.length + ' chương · ' + (min === max ? ('Chương ' + min) : ('Chương ' + min + '–' + max))
       : 'Chưa có chương nào';
-    var visibleChapters = chapters.slice().reverse();
+    var visibleChapters = settings.sort === 'desc' ? chapters.slice().reverse() : chapters.slice();
     if (chapterQuery) {
       var wanted = parseInt(chapterQuery, 10);
       visibleChapters = visibleChapters.filter(function (c) { return c.num === wanted; });
@@ -526,6 +537,7 @@
 
   /* ---------- boot ---------- */
   applySettings();
+  updateSortLabel();
   renderLibrary();
   syncCrawled();   // pull any chapters added by the daily crawl
 })();

@@ -83,9 +83,15 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 .tool.primary{background:var(--accent);color:#fff;border-color:var(--accent);}
 .tool svg{width:17px;height:17px;}
 
-.sec-head{display:flex;align-items:baseline;justify-content:space-between;margin:30px 4px 12px;}
+.sec-head{display:flex;align-items:center;justify-content:space-between;margin:30px 4px 12px;}
 .sec-head h2{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;margin:0;}
 .sec-head span{font-size:12px;color:var(--ink-soft);}
+.sec-actions{display:flex;align-items:center;gap:10px;}
+.sort-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border-radius:99px;
+  background:var(--paper);border:1px solid var(--line);color:var(--ink-soft);
+  font-size:12px;font-weight:600;transition:transform .12s var(--ease),color .15s;}
+.sort-btn:active{transform:scale(.94);}
+.sort-btn svg{width:14px;height:14px;color:var(--accent);}
 
 .chap-search{
   display:flex;align-items:center;gap:10px;margin:0 0 4px;padding:0 13px;
@@ -271,7 +277,16 @@ textarea.inp:focus{outline:none;border-color:var(--accent);}
           Tùy chỉnh
         </button>
       </div>
-      <div class="sec-head"><h2>Mục lục</h2><span id="chapCount"></span></div>
+      <div class="sec-head">
+        <h2>Mục lục</h2>
+        <div class="sec-actions">
+          <span id="chapCount"></span>
+          <button class="sort-btn" id="sortBtn" type="button" aria-label="Đổi thứ tự sắp xếp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16M7 20l-3-3M7 20l3-3M17 20V4M17 4l-3 3M17 4l3 3"/></svg>
+            <span id="sortLbl">Mới nhất</span>
+          </button>
+        </div>
+      </div>
       <label class="chap-search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
         <input id="chapSearch" type="search" inputmode="numeric" pattern="[0-9]*" placeholder="Tìm theo số chương" aria-label="Tìm theo số chương">
